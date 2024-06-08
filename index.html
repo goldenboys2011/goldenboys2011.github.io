@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Odysseas Chryssos - Golden</title>
+    <title>Odysseas Chryssos - golden</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
@@ -13,7 +13,8 @@
             color: #ffffff;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow-y: inherit;
+            overflow-x: hidden;
             position: relative;
         }
 
@@ -26,7 +27,7 @@
             border-radius: 10px;
             box-shadow: 0 0 10px 2px #ff007f; 
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
         h1, h2, h3 {
@@ -116,9 +117,10 @@
         /* Floating elements */
         .floating {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #ffbb00;
+            width: var(--wh);
+            height: var(--wh);
+            background: var(--color);
+            border-color:   #121212;
             border-radius: 50%;
             opacity: 0.7;
         }
@@ -130,6 +132,11 @@
             100% {
                 transform: translate(var(--move-x), var(--move-y));
             }
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 0px;
         }
     </style>
 </head>
@@ -143,10 +150,10 @@
 
     <div class="container">
         <div class="photo">
-            <img src="your-photo-url.jpg" alt="Odysseas Chryssos">
+            <img src="pfp.jpg" alt="Odysseas Chryssos">
         </div>
         <h1>Odysseas Chryssos</h1>
-        <p style="text-align: center;">Online, they call me Golden</p>
+        <p style="text-align: center;">Online, they call me golden</p>
 
         <div id="about" class="about">
             <h2>About Me</h2>
@@ -156,8 +163,8 @@
         <div id="projects" class="projects">
             <h2>Projects</h2>
             <ul>
-                <li>My startup "company": <a href="https://goldencube.dev" target="_blank">goldencube.dev</a></li>
-                <li>Registrar: <a href="https://registrar.3feds.lol" target="_blank">registrar.3feds.lol</a></li>
+                <li>My startup "company": <a href="https://goldencube.dev" target="_blank"> goldencube</a></li>
+                <li>Registrar: <a href="https://registrar.3feds.lol" target="_blank"> 3feds Registrar</a></li>
             </ul>
         </div>
 
@@ -165,17 +172,17 @@
             <h2>Social Media</h2>
             <h3>Personal</h3>
             <ul class="social-list">
-                <li>Instagram: <a href="https://www.instagram.com/odysseas.chryssos" target="_blank">@odysseas.chryssos</a></li>
-                <li>YouTube: <a href="https://www.youtube.com/@odysseusChrysso" target="_blank">@odysseusChrysso</a></li>
-                <li>GitHub: <a href="https://github.com/goldenboys2011">@goldenboys</a></li>
+                <li>Instagram: <a href="https://www.instagram.com/odysseas.chryssos" target="_blank"> @odysseas.chryssos</a></li>
+                <li>YouTube: <a href="https://www.youtube.com/@odysseusChrysso" target="_blank"> @odysseusChrysso</a></li>
+                <li>GitHub:<a href="https://github.com/goldenboys2011">@goldenboys2011</a></li>
                 <li>Discord: @goldenboys2011</li>
             </ul>
-            <h3>Goldenboys2011</h3>
+            <h3>goldenboys2011</h3>
             <ul class="social-list">
-                <li>YouTube: <a href="https://www.youtube.com/@goldenboys2011GR" target="_blank">@goldenboys2011GR</a></li>
-                <li>Instagram: <a href="https://www.instagram.com/goldenboys2011GR" target="_blank">@goldenboys2011GR</a></li>
-                <li>Twitch: <a href="https://www.twitch.tv/goldenboys2011GR" target="_blank">@goldenboys2011GR</a></li>
-                <li>TikTok: <a href="https://www.tiktok.com/@goldenboys.2011" target="_blank">@goldenboys.2011</a></li>
+                <li>YouTube: <a href="https://www.youtube.com/@goldenboys2011GR" target="_blank"> @goldenboys2011GR</a></li>
+                <li>Instagram: <a href="https://www.instagram.com/goldenboys2011GR" target="_blank"> @goldenboys2011GR</a></li>
+                <li>Twitch: <a href="https://www.twitch.tv/goldenboys2011GR" target="_blank"> @goldenboys2011GR</a></li>
+                <li>TikTok: <a href="https://www.tiktok.com/@goldenboys.2011" target="_blank"> @goldenboys.2011</a></li>
             </ul>
         </div>
 
@@ -197,32 +204,42 @@
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
-        function createFloatingElement() {
+        function getRandomColor() {
+            // Define an array of colors that fit the theme
+            const colors = ['#ffbb00', '#00ff99', '#ff007f', '#00bfff', '#ffff00'];
+            // Get a random index from the array
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            // Return the color at that random index
+            return colors[randomIndex];
+        }
+
+        function createFloatingElement(color) {
             const floating = document.createElement('div');
             floating.className = 'floating';
             document.body.appendChild(floating);
 
-            const startX = getRandomInt(0, window.innerWidth);
-            const startY = getRandomInt(0, window.innerHeight);
+            const startX = getRandomInt(0, 1500);
+            const startY = getRandomInt(0, 1500);
             const moveX = getRandomInt(-200, 200);
             const moveY = getRandomInt(-200, 200);
-            const duration = getRandomInt(5, 10);
+            const wh = getRandomInt(10, 30);
+            const duration = getRandomInt(5, 100);
 
             floating.style.left = `${startX}px`;
             floating.style.top = `${startY}px`;
             floating.style.setProperty('--move-x', `${moveX}px`);
             floating.style.setProperty('--move-y', `${moveY}px`);
+            floating.style.setProperty('--wh', `${wh}px`);
+            floating.style.setProperty('--color', color); // Set random color
             floating.style.animation = `float ${duration}s linear infinite`;
-
-            setTimeout(() => {
-                floating.remove();
-                createFloatingElement();
-            }, duration * 1000);
+            
+            
         }
-
-        for (let i = 0; i < 30; i++) {
+        const color = getRandomColor(); // Get random color
+        for (let i = 0; i < 200; i++) {
             console.log("making")
             createFloatingElement();
+            createFloatingElement(color);
         }
     </script>
 </body>
